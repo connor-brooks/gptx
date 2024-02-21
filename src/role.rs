@@ -1,10 +1,34 @@
 use crate::state::TgptState;
+use colored::*;
+use serde::Deserialize;
+use std::fs;
 
-pub fn role_builder(state: &TgptState) -> String {
-    if state.piped {
-        String::from("The user has piped in some text which may or may not make sense on it's own. IMPORTANT: Unless asked a question that requires an human-lanague answer, Provide only code as output without any description. Provide only code in plain text format without Markdown formatting. Do not include symbols such as ``` or ```python.\n")
-    } else {
-        String::from("IMPORTANT: Unless asked a question that requires an human-lanague answer, Provide only code as output without any description. Provide only code in plain text format without Markdown formatting. Do not include symbols such as ``` or ```python")
-        //String::from("You are TGPT (terminal GPT). keep your answers consise unless otherwise stated, assume prior knowlege of the topic\n IMPORTANT: Unless asked a question that requires an human-lanague answer, Provide only code as output without any description. Provide only code in plain text format without Markdown formatting. Do not include symbols such as ``` or ```python")
-    }
+#[derive(Debug, Deserialize)]
+struct Config {
+    role: Vec<Role>,
+}
+
+#[derive(Debug, Deserialize)]
+struct Role {
+    name: String,
+    version: u8,
+    prompt: String,
+}
+
+fn read_config() -> Result<Config, anyhow::Error> {
+    let config_str = fs::read_to_string("config.toml")?;
+    let config: Config = toml::from_str(&config_str)?;
+    Ok(config)
+}
+
+//TODO cleanup role builder
+pub fn role_builder(_state: &TgptState) -> String {
+    let config = read_config().unwrap_or_else(|e| {
+        println!("{}", "config could not be read, exiting:".red());
+        std::process::exit(-1)
+    });
+
+    config.role[0].prompt.clone()
+
+    //String::from("IMPORTANT: if asked a technical question only only provide code as output without any description. Provide only code in plain text format without Markdown formatting. Do not include symbols such as ``` or ```python")
 }
