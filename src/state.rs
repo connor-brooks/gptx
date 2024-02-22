@@ -1,8 +1,4 @@
-use std::env;
-
 use crate::config;
-use crate::format::print_verbose;
-use crate::role;
 use atty::Stream;
 use chatgpt::prelude::*;
 use clap::Parser;
@@ -108,12 +104,7 @@ pub fn init(conf: config::Config) -> TgptState {
         config: conf,
     };
 
-    let role = role::role_builder(&state);
-    print_verbose(
-        &format!("{} {}", "built role:".bold(), &role),
-        state.verbose,
-    );
-    let conversation = client.new_conversation_directed(role);
+    let conversation = client.new_conversation_directed(state.config.get_default_role().prompt);
     state.conversation = Some(conversation);
 
     if state.verbose {

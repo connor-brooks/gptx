@@ -3,7 +3,6 @@ mod chat;
 mod config;
 mod format;
 mod repl;
-mod role;
 mod state;
 use colored::*;
 
