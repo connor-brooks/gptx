@@ -1,5 +1,6 @@
 use std::env;
 
+use crate::config;
 use crate::format::print_verbose;
 use crate::role;
 use atty::Stream;
@@ -23,6 +24,8 @@ pub struct TgptState {
     pub api_key: Option<String>,
 
     pub args: Args,
+
+    pub config: config::Config,
 }
 
 /// TGPT is a terminal helper program based on OpenAI's GPT3 and GPT4 APIs... WIP :)
@@ -75,7 +78,7 @@ fn print_state(s: &TgptState) {
     println!("{}", "+-----------------------------+".yellow());
 }
 
-pub fn init() -> TgptState {
+pub fn init(conf: config::Config) -> TgptState {
     let args = Args::parse();
     let api_key = env::var("OPENAI_API_KEY").unwrap_or_else(|_| {
         println!("{}", "No API key set, please set OPENAI_API_KEY".red());
@@ -107,6 +110,7 @@ pub fn init() -> TgptState {
         conversation: None,
         api_key: None,
         args,
+        config: conf,
     };
 
     let role = role::role_builder(&state);

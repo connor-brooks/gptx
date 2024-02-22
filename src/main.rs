@@ -1,13 +1,20 @@
 use anyhow::Result;
 mod chat;
+mod config;
 mod format;
 mod repl;
 mod role;
 mod state;
+use colored::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let mut state = state::init();
+    let conf = config::read_config().unwrap_or_else(|e| {
+        println!("{}", "config could not be read, exiting:".red());
+        std::process::exit(-1)
+    });
+
+    let mut state = state::init(conf);
 
     if state.piped {
         format::print_verbose("handling piped data", state.verbose);
