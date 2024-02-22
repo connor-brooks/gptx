@@ -80,14 +80,9 @@ fn print_state(s: &TgptState) {
 
 pub fn init(conf: config::Config) -> TgptState {
     let args = Args::parse();
-    let api_key = env::var("OPENAI_API_KEY").unwrap_or_else(|_| {
-        println!("{}", "No API key set, please set OPENAI_API_KEY".red());
-        std::process::exit(-1);
-    });
-
     let client = if args.model_4 {
         ChatGPT::new_with_config(
-            api_key.to_string(),
+            conf.get_api_key(),
             ModelConfigurationBuilder::default()
                 .engine(ChatGPTEngine::Gpt4)
                 .build()
@@ -95,7 +90,7 @@ pub fn init(conf: config::Config) -> TgptState {
         )
         .unwrap()
     } else {
-        ChatGPT::new(api_key.to_string()).unwrap()
+        ChatGPT::new(conf.get_api_key()).unwrap()
     };
 
     let mut state = TgptState {
