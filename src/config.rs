@@ -10,7 +10,6 @@ pub struct Config {
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct Role {
-    pub name: String,
     pub version: u8,
     pub prompt: String,
 }
@@ -19,9 +18,6 @@ pub fn read_config() -> Result<Config, anyhow::Error> {
     let home_dir = env::var("HOME")?;
     let config_str = fs::read_to_string(home_dir + "/.config/tgpt/config.toml")?;
     let config: Config = toml::from_str(&config_str)?;
-    for (name, role) in config.role.clone() {
-        println!("{} {}", name, role.prompt)
-    }
     Ok(config)
 }
 

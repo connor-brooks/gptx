@@ -1,0 +1,20 @@
+[role.default]
+    version = 4
+    prompt = "attempt to assist the user. keep the messages brief when possible"
+   
+[role.fr]
+    version = 4
+    prompt = "attempt to assist the user. keep the messages brief when possible. only reply in french."
+    
+[role.cmd]
+    version = 4
+    prompt = "only reply in unix commands. no english or explanations just output the command"
+
+[role.rs]
+    version = 4
+    prompt = "only reply in rust code. no english or explanations just output the code"
+    
+[role.py]
+    version = 4
+    prompt = "only reply in python code. no english or explanations just output the code"
+    
