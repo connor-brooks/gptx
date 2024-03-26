@@ -2,7 +2,6 @@ use crate::cli;
 use crate::config;
 use atty::Stream;
 use chatgpt::prelude::*;
-use clap::Parser;
 use colored::*;
 
 pub struct TgptState {

@@ -23,7 +23,12 @@ pub fn read_config() -> Result<Config, anyhow::Error> {
 
 impl Config {
     pub fn get_role(&self, role: String) -> Role {
-        self.role[&role].clone()
+        if let Some(v) = self.role.get(&role) {
+            v.clone()
+        } else {
+            println!("{} {}", "Could not find role: ".red(), role);
+            std::process::exit(-1);
+        }
     }
 
     pub fn get_api_key(&self) -> String {
