@@ -7,24 +7,24 @@ use futures_util::StreamExt;
 use std::io;
 use std::io::{stdout, Write};
 
-pub async fn handle_pipe(state: &mut state::TgptState) {
-    let mut piped = String::new();
-    match io::stdin().read_line(&mut piped) {
+pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
+    let mut piped_msg = String::new();
+    match io::stdin().read_line(&mut piped_msg) {
         Ok(_) => {}
         Err(error) => {
             println!("Error getting piped: {:?}", error);
         }
     }
 
-    let prompt = state.inital_message.clone().unwrap_or("".to_string());
-    let final_str = format!("{}\n{}", prompt, piped);
+    let inital_msg = state.inital_message.clone().unwrap_or("".to_string());
+    let final_msg = format!("{}\n{}", inital_msg, piped_msg);
 
     format::print_verbose(
-        &format!("{} {}", "built pipe input:".bold(), final_str),
+        &format!("{} {}", "built pipe input:".bold(), final_msg),
         state.verbose,
     );
 
-    if let Err(e) = send_dialog(state, final_str).await {
+    if let Err(e) = process_single_msg(state, final_msg).await {
         println!(
             "{}. {}",
             "An error occured processing your message: ".red(),
@@ -41,7 +41,10 @@ pub async fn handle_pipe(state: &mut state::TgptState) {
     std::process::exit(0);
 }
 
-pub async fn send_dialog(state: &mut state::TgptState, message: String) -> Result<(), Error> {
+pub async fn process_single_msg(
+    state: &mut state::TgptState,
+    message: String,
+) -> Result<(), Error> {
     let mut stream = match &mut state.conversation {
         Some(conv) => conv.send_message_streaming(message).await?,
         None => std::process::exit(-1),
@@ -61,9 +64,12 @@ pub async fn send_dialog(state: &mut state::TgptState, message: String) -> Resul
                     response_index,
                 });
             }
-            other => output.push(other),
+            other => {
+                output.push(other);
+            }
         }
     }
+
     let messages = ChatMessage::from_response_chunks(output);
     match &mut state.conversation {
         Some(conv) => conv.history.push(messages[0].to_owned()),

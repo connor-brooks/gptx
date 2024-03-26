@@ -1,5 +1,7 @@
 use anyhow::Result;
+use clap::Parser;
 mod chat;
+mod cli;
 mod config;
 mod format;
 mod repl;
@@ -9,20 +11,22 @@ use colored::*;
 #[tokio::main]
 async fn main() -> Result<()> {
     let conf = config::read_config().unwrap_or_else(|e| {
-        println!("{}", "config could not be read, exiting:".red());
+        println!("{} {}", "config could not be read, exiting:".red(), e);
         std::process::exit(-1)
     });
 
-    let mut state = state::init(conf);
+    let args = cli::Args::parse();
+
+    let mut state = state::init(conf, args);
 
     if state.piped {
         format::print_verbose("handling piped data", state.verbose);
-        chat::handle_pipe(&mut state).await;
+        chat::process_piped_msg(&mut state).await?;
     }
 
     if let Some(s) = state.inital_message.clone() {
         format::print_verbose("handling argument message", state.verbose);
-        let _ = chat::send_dialog(&mut state, s).await;
+        let _ = chat::process_single_msg(&mut state, s).await;
 
         if !state.repl_mode {
             format::print_verbose("no REPL mode, exiting", state.verbose);

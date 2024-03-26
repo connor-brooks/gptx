@@ -21,7 +21,11 @@ pub async fn repl_loop(state: &mut state::TgptState) -> Result<(), Error> {
         match readline {
             Ok(line) => {
                 let _ = rl.add_history_entry(line.as_str());
-                let _ = chat::send_dialog(state, line).await;
+                chat::process_single_msg(state, line)
+                    .await
+                    .unwrap_or_else(|e| {
+                        println!("{} {}", "an error occured:".red(), e);
+                    });
             }
             Err(ReadlineError::Interrupted) => {
                 println!("CTRL-C");
