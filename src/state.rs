@@ -12,9 +12,6 @@ pub struct TgptState {
     pub model_4: bool,
     pub verbose: bool,
     pub conversation: Option<Conversation>,
-    pub api_key: String,
-    pub args: cli::Args,
-    pub config: config::Config,
 }
 
 fn print_state(s: &TgptState) {
@@ -39,18 +36,15 @@ pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
         model_4: args.model_4,
         verbose: args.verbose,
         conversation: None,
-        api_key: conf.get_api_key(),
-        args,
-        config: conf,
     };
 
-    let role = state.config.get_role(state.role.clone());
+    let role = conf.get_role(state.role.clone());
     state.model_4 |= role.version == 4;
 
     // GPT4 or 3:
     let gpt_client = if state.model_4 {
         ChatGPT::new_with_config(
-            &state.api_key,
+            conf.get_api_key(),
             ModelConfigurationBuilder::default()
                 .engine(ChatGPTEngine::Gpt4)
                 .build()
@@ -58,7 +52,7 @@ pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
         )
         .unwrap()
     } else {
-        ChatGPT::new(&state.api_key).unwrap()
+        ChatGPT::new(conf.get_api_key()).unwrap()
     };
 
     let conversation = gpt_client.new_conversation_directed(role.prompt);

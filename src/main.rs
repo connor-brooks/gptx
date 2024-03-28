@@ -4,7 +4,6 @@ mod chat;
 mod cli;
 mod config;
 mod format;
-mod repl;
 mod state;
 use colored::*;
 
@@ -16,7 +15,6 @@ async fn main() -> Result<()> {
     });
 
     let args = cli::Args::parse();
-
     let mut state = state::init(conf, args);
 
     if state.piped {
@@ -36,5 +34,5 @@ async fn main() -> Result<()> {
     }
 
     format::print_verbose("entering repl", state.verbose);
-    repl::repl_loop(&mut state).await
+    cli::repl_loop(&mut state).await
 }

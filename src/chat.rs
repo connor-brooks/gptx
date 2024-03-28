@@ -37,7 +37,7 @@ pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
         );
     }
 
-    if state.args.repl_mode {
+    if state.repl_mode {
         println!(
             "{} REPL mode not avaiable when data is piped into TGPT!",
             String::from("Note:").red()
