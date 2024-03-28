@@ -24,9 +24,10 @@ async fn main() -> Result<()> {
         chat::process_piped_msg(&mut state).await?;
     }
 
-    if let Some(s) = state.inital_message.clone() {
+    if state.inital_message.is_some() {
         format::print_verbose("handling argument message", state.verbose);
-        let _ = chat::process_single_msg(&mut state, s).await;
+        let initial_msg = state.inital_message.clone().unwrap();
+        let _ = chat::process_single_msg(&mut state, initial_msg).await;
 
         if !state.repl_mode {
             format::print_verbose("no REPL mode, exiting", state.verbose);
