@@ -44,6 +44,9 @@ pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
         config: conf,
     };
 
+    let role = state.config.get_role(state.role.clone());
+    state.model_4 |= role.version == 4;
+
     // GPT4 or 3:
     let gpt_client = if state.model_4 {
         ChatGPT::new_with_config(
@@ -58,8 +61,7 @@ pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
         ChatGPT::new(&state.api_key).unwrap()
     };
 
-    let conversation =
-        gpt_client.new_conversation_directed(state.config.get_role(state.role.clone()).prompt);
+    let conversation = gpt_client.new_conversation_directed(role.prompt);
     state.conversation = Some(conversation);
 
     if state.verbose {
