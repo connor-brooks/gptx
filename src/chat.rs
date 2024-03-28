@@ -1,4 +1,4 @@
-use crate::format;
+use crate::cli;
 use crate::state;
 use anyhow::{Error, Result};
 use chatgpt::prelude::*;
@@ -24,7 +24,7 @@ pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
     let inital_msg = state.inital_message.clone().unwrap_or("".to_string());
     let final_msg = format!("{}\n{}", inital_msg, piped_msg);
 
-    format::print_verbose(
+    cli::print_verbose(
         &format!("{} {}", "built pipe input:".bold(), final_msg),
         state.verbose,
     );
