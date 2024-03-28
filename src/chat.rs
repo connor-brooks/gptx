@@ -9,11 +9,16 @@ use std::io::{stdout, Write};
 
 pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
     let mut piped_msg = String::new();
-    match io::stdin().read_line(&mut piped_msg) {
-        Ok(_) => {}
-        Err(error) => {
-            println!("Error getting piped: {:?}", error);
+    loop {
+        let mut buf = String::new();
+        match io::stdin().read_line(&mut buf) {
+            Ok(0) => break,
+            Ok(_) => {}
+            Err(error) => {
+                println!("Error getting piped: {:?}", error);
+            }
         }
+        piped_msg.push_str(&buf);
     }
 
     let inital_msg = state.inital_message.clone().unwrap_or("".to_string());
