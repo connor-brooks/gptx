@@ -1,7 +1,7 @@
 # TGPT
 *A terminal GPT program*
 
-TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. It's goal is to extensible and easy to integrate into existing workflows. The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
+TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to provide a simple building block to integrate LLM into existing workflows, combining the power of LLMs with the UNIX philosophy. 
 
 ## Features
 * REPL mode
@@ -9,6 +9,7 @@ TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT AP
 * Processes piped data
 * Vi keybindings
 * Prompt history
+* User defined roles
 
 ## Usage
 * You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml`
@@ -30,7 +31,7 @@ Options:
 ```
 
 ## Roles
-Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. They should all follow this format:
+Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. An example config can be found in `example/config.toml`. All roles should follow this format:
 
 ```
 [role.default]
@@ -46,3 +47,12 @@ For example, to create a role that only replies in rust code:
     prompt = "only reply in rust code. no english or explanations just output the code"
 ```
 Which can be called with `tgpt -r rs "how to reverse a vector"`. Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
+
+## Scripting
+tgpt attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. 
+### Examples
+#### cgpt
+todo
+
+## Notes
+* The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
