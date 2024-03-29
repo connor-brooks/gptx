@@ -11,8 +11,8 @@ TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT AP
 * Prompt history
 
 ## Usage
-* You must set the `OPENAI_API_KEY` enviroment variable to use `tgpt`.
-* You must have a `config.toml` with a default role
+* You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml`
+* You must define at least a default role in `config.toml`
 
 ```
 Usage: tgpt [OPTIONS] [PROMPT]
@@ -21,12 +21,28 @@ Arguments:
   [PROMPT]  Prompt
 
 Options:
-  -r, --repl                 Activate REPL mode
-  -e, --echo                 Activate echo
-  -c, --command              Generate shell commands
-  -4, --model4               Enable ChatGPT 4 model
-  -a, --attach <ATTACHMENT>  Attach a file
-  -v, --verbose              Verbose output
-  -h, --help                 Print help
-  -V, --version              Print version
+  -r, --role <ROLE>  Role to use [default: default]
+  -4, --model4       Force ChatGPT 4 model
+  -R, --repl         Activate REPL mode
+  -v, --verbose      Verbose output
+  -h, --help         Print help
+  -V, --version      Print version
 ```
+
+## Roles
+Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. They should all follow this format:
+
+```
+[role.default]
+    version = 4
+    prompt = "attempt to assist the user. keep the messages brief when possible"
+```
+
+For example, to create a role that only replies in rust code:
+
+```
+[role.rs]
+    version = 4
+    prompt = "only reply in rust code. no english or explanations just output the code"
+```
+Which can be called with `tgpt -r rs "how to reverse a vector"`. Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
