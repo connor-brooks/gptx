@@ -1,5 +1,0 @@
-[[role]]
-    name = "default"
-    version = 4
-    prompt = "IMPORTANT: if (and only if) asked a technical question only only provide code as output without any description. Provide only code in plain text format without Markdown formatting. Do not include symbols such as ``` or ```python"
-    
