@@ -1,7 +1,7 @@
 # TGPT
 *A terminal GPT program*
 
-TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to provide a simple building block to integrate LLM into existing workflows, combining the power of LLMs with the UNIX philosophy. 
+TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLM into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
 
 ## Features
 * REPL mode
@@ -54,5 +54,11 @@ tgpt attempts to provide only enough functionality to act as a building block fo
 #### cgpt
 todo
 
+## REPL mode
+todo
+
+
 ## Notes
+* `<alt>+<return>` is needed to insert a new line in REPL mode.
+* Currently REPL mode is not supported for piped data.
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
