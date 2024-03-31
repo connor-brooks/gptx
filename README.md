@@ -13,10 +13,9 @@ TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT AP
 
 ## Usage
 > [!IMPORTANT]
-> You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml`
-> [!IMPORTANT]
-> You must define at least a default role in `config.toml`
+> You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml` You must also define at least a default role in `config.toml`
 
+### Arguments
 ```
 Usage: tgpt [OPTIONS] [PROMPT]
 
@@ -31,6 +30,19 @@ Options:
   -h, --help         Print help
   -V, --version      Print version
 ```
+
+### REPL mode
+If TGPT is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `tgpt -R "what is the capital of France"`)
+
+| Keybinding   | Action           |
+| ------------ | ---------------- |
+| Return       | Send message     |
+| ESC          | Enter vi mode    |
+| ALT + Return | Insert newline   |
+| UP           | Previous history |
+| Down         | Next history     |
+
+### Piped mode
 
 ## Roles
 Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. An example config can be found in `example/config.toml`. All roles should follow this format:
