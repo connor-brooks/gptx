@@ -12,8 +12,10 @@ TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT AP
 * User defined roles
 
 ## Usage
-* You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml`
-* You must define at least a default role in `config.toml`
+> [!IMPORTANT]
+> You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml`
+> [!IMPORTANT]
+> You must define at least a default role in `config.toml`
 
 ```
 Usage: tgpt [OPTIONS] [PROMPT]
