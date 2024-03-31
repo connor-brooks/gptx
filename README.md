@@ -1,5 +1,5 @@
 # TGPT
-*A terminal GPT program*
+*GPT for the Unix shell*
 
 TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLM into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
 
@@ -43,8 +43,12 @@ If TGPT is started with no arguments it will automatically start REPL mode. REPL
 | Down         | Next history     |
 
 ### Piped mode
+Piped mode allows data from any other program to be piped into your selected role whilst also providing an initial prompt. For example: `cat main.rs | tgpt -r rs "add comments to this code" > main.commented.rs`. Currently Piped mode does not support REPL mode. 
 
 ## Roles
+> [!TIP]
+> A role's GPT version can be overridden at runtime using the -4 flag to force GPT4.
+
 Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. An example config can be found in `example/config.toml`. All roles should follow this format:
 
 ```
@@ -52,7 +56,6 @@ Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. A
     version = 4
     prompt = "attempt to assist the user. keep the messages brief when possible"
 ```
-
 For example, to create a role that only replies in rust code:
 
 ```
@@ -67,10 +70,6 @@ tgpt attempts to provide only enough functionality to act as a building block fo
 ### Examples
 #### cgpt
 todo
-
-## REPL mode
-todo
-
 
 ## Notes
 * `<alt>+<return>` is needed to insert a new line in REPL mode.
