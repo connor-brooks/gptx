@@ -38,6 +38,10 @@ pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
         conversation: None,
     };
 
+    if state.piped {
+        state.repl_mode = false
+    }
+
     let role = conf.get_role(state.role.clone());
     state.model_4 |= role.version == 4;
 

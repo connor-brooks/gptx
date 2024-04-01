@@ -1,2 +1,21 @@
 #!/bin/bash
-tgpt -r cmd "$@" | yn
+
+if [ -z "$@" ] 
+then
+    echo "Please provide an argument"
+    exit
+fi
+
+CMD=$(tgpt -r cmd "$@")
+
+echo "You are about to run: $CMD"
+echo -n "Are you sure? [y/N]: " >/dev/tty
+read RESP </dev/tty
+
+if [[ "$RESP" =~ ^[Yy]$ ]]
+then
+    eval "$CMD"
+else
+    echo "Aborted."
+fi
+
