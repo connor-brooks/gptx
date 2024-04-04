@@ -93,7 +93,7 @@ Are you sure? [y/N]:
 ```
 
 ## Contribute
-Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder and make a pull request. Please ensure you include any roles used in a comment.
+Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder and make a pull request. Please ensure your script follows the template!
 
 ## Notes
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).

@@ -1,4 +1,14 @@
 #!/bin/bash
+# Name: Command Generator
+# Description: Generates commands and prompts the user to execute them.
+# Version: 0.5
+# Author: Connor Brooks
+# Role: 
+#   [role.cmd]
+#       version = 4
+#       prompt = "only reply in unix commands. no english or explanations just output the command"
+#
+
 
 if [ -z "$@" ] 
 then
