@@ -43,7 +43,16 @@ If TGPT is started with no arguments it will automatically start REPL mode. REPL
 | Down         | Next history     |
 
 ### Piped mode
-Piped mode allows data from any other program to be piped into your selected role whilst also providing an initial prompt. For example: `cat main.rs | tgpt -r rs "add comments to this code" > main.commented.rs`. Currently Piped mode does not support REPL mode. 
+Piped mode allows data from any other program to be piped into your selected role whilst also providing an initial prompt. For example:
+```
+$ echo "dog elephant snake bee whale" | tgpt "sort these by weight"
+whale, elephant, dog, snake, bee
+```
+The output of TGPT can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | tgpt -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
+
+> [!NOTE]
+> Currently Piped mode does not support REPL mode. 
+
 
 ## Roles
 > [!TIP]
@@ -63,7 +72,13 @@ For example, to create a role that only replies in rust code:
     version = 4
     prompt = "only reply in rust code. no english or explanations just output the code"
 ```
-Which can be called with `tgpt -r rs "how to reverse a vector"`. Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
+Which can be called with `tgpt -r rs "how to reverse a vector"`. 
+```
+tgpt -r rs "how to reverse a vector"
+let mut vec = vec![1, 2, 3, 4, 5];
+vec.reverse();
+```
+Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
 
 ## Scripting
 TGPT attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
