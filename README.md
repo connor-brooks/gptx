@@ -66,12 +66,13 @@ For example, to create a role that only replies in rust code:
 Which can be called with `tgpt -r rs "how to reverse a vector"`. Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
 
 ## Scripting
-tgpt attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. 
+TGPT attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
 ### Examples
 #### cgpt
 todo
 
+## Contribute
+Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder and make a pull request. Please ensure you include any roles used in a comment.
+
 ## Notes
-* `<alt>+<return>` is needed to insert a new line in REPL mode.
-* Currently REPL mode is not supported for piped data.
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
