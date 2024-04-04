@@ -1,7 +1,7 @@
 # TGPT
 *GPT for the Unix shell*
 
-TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLM into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
+TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
 
 ## Features
 * REPL mode
@@ -43,6 +43,9 @@ If TGPT is started with no arguments it will automatically start REPL mode. REPL
 | Down         | Next history     |
 
 ### Piped mode
+> [!NOTE]
+> Currently Piped mode does not support REPL mode. 
+
 Piped mode allows data from any other program to be piped into your selected role whilst also providing an initial prompt. For example:
 ```
 $ echo "dog elephant snake bee whale" | tgpt "sort these by weight"
@@ -50,8 +53,6 @@ whale, elephant, dog, snake, bee
 ```
 The output of TGPT can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | tgpt -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
 
-> [!NOTE]
-> Currently Piped mode does not support REPL mode. 
 
 
 ## Roles
@@ -78,13 +79,18 @@ tgpt -r rs "how to reverse a vector"
 let mut vec = vec![1, 2, 3, 4, 5];
 vec.reverse();
 ```
-Alternatively an alias can be set with alias `rsgpt="tgpt -r rs"`.
+Alternatively an alias can be set with `alias rsgpt="tgpt -r rs"`.
 
 ## Scripting
 TGPT attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
 ### Examples
 #### cgpt
-todo
+The `cgpt` example illustrates how to safely make a command generating script. Below is an example of it's usage:
+```
+$ ./cgpt "resize all images in dir to 100px"
+You are about to run: mogrify -resize 100x100 *.jpg
+Are you sure? [y/N]: 
+```
 
 ## Contribute
 Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder and make a pull request. Please ensure you include any roles used in a comment.
