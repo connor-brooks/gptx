@@ -1,4 +1,5 @@
-# TGPT
+![GPTX Logo](logo.png)
+
 *GPT for the Unix shell*
 
 TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
