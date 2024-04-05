@@ -52,8 +52,6 @@ whale, elephant, dog, snake, bee
 ```
 The output of gptx can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | gptx -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
 
-
-
 ## Roles
 > [!TIP]
 > A role's GPT version can be overridden at runtime using the -4 flag to force GPT4.
@@ -91,13 +89,11 @@ You are about to run: mogrify -resize 100x100 *.jpg
 Are you sure? [y/N]: 
 ```
 
-## Contribute
-Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder, add your script to the table below and make a pull request. Please ensure your script follows the template!
-
 ## Contributed Scripts / Roles
+Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder, add your script to the table below and make a pull request. Please ensure your script follows the template!
 | Name                                                                                   | Description                                 | Author                                              |
 | -------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------|
-| [cgpt](https://raw.githubusercontent.com/connor-brooks/gptx/main/example/scripts/cgpt) | CLI command generator with execution dialog | [Connor Brooks](https://github.com/connor-brooks    |
+| [cgpt](https://raw.githubusercontent.com/connor-brooks/gptx/main/example/scripts/cgpt) | CLI command generator with execution dialog | [Connor Brooks](https://github.com/connor-brooks)    |
 
 ## Notes
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
