@@ -7,7 +7,7 @@ use futures_util::StreamExt;
 use std::io;
 use std::io::{stdout, Write};
 
-pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
+pub async fn process_piped_msg(state: &mut state::GptxState) -> Result<()> {
     let mut piped_msg = String::new();
     loop {
         let mut buf = String::new();
@@ -39,7 +39,7 @@ pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
 
     if state.repl_mode {
         println!(
-            "{} REPL mode not avaiable when data is piped into TGPT!",
+            "{} REPL mode not avaiable when data is piped into GPTX!",
             String::from("Note:").red()
         );
     }
@@ -47,7 +47,7 @@ pub async fn process_piped_msg(state: &mut state::TgptState) -> Result<()> {
 }
 
 pub async fn process_single_msg(
-    state: &mut state::TgptState,
+    state: &mut state::GptxState,
     message: String,
 ) -> Result<(), Error> {
     let mut stream = match &mut state.conversation {

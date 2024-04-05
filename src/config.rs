@@ -16,7 +16,7 @@ pub struct Role {
 
 pub fn read_config() -> Result<Config, anyhow::Error> {
     let home_dir = env::var("HOME")?;
-    let config_str = fs::read_to_string(home_dir + "/.config/tgpt/config.toml")?;
+    let config_str = fs::read_to_string(home_dir + "/.config/gptx/config.toml")?;
     let config: Config = toml::from_str(&config_str)?;
     Ok(config)
 }

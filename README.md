@@ -2,7 +2,7 @@
 
 *GPT for the Unix shell*
 
-TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining TGPT, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
+GPTX (GPT for UNIX) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining GPTX, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
 
 ## Features
 * REPL mode
@@ -18,7 +18,7 @@ TGPT (terminal GPT) is a simple CLI program for interacting with OpenAI's GPT AP
 
 ### Arguments
 ```
-Usage: tgpt [OPTIONS] [PROMPT]
+Usage: gptx [OPTIONS] [PROMPT]
 
 Arguments:
   [PROMPT]  Prompt
@@ -33,7 +33,7 @@ Options:
 ```
 
 ### REPL mode
-If TGPT is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `tgpt -R "what is the capital of France"`)
+If GPTX is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `gptx -R "what is the capital of France"`)
 
 | Keybinding   | Action           |
 | ------------ | ---------------- |
@@ -49,10 +49,10 @@ If TGPT is started with no arguments it will automatically start REPL mode. REPL
 
 Piped mode allows data from any other program to be piped into your selected role whilst also providing an initial prompt. For example:
 ```
-$ echo "dog elephant snake bee whale" | tgpt "sort these by weight"
+$ echo "dog elephant snake bee whale" | gptx "sort these by weight"
 whale, elephant, dog, snake, bee
 ```
-The output of TGPT can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | tgpt -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
+The output of GPTX can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | gptx -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
 
 
 
@@ -60,7 +60,7 @@ The output of TGPT can of course be piped or redirected just like any other CLI 
 > [!TIP]
 > A role's GPT version can be overridden at runtime using the -4 flag to force GPT4.
 
-Roles can be defined in the main config file `$HOME/.config/tgpt/config.toml`. An example config can be found in `example/config.toml`. All roles should follow this format:
+Roles can be defined in the main config file `$HOME/.config/gptx/config.toml`. An example config can be found in `example/config.toml`. All roles should follow this format:
 
 ```
 [role.default]
@@ -74,16 +74,16 @@ For example, to create a role that only replies in rust code:
     version = 4
     prompt = "only reply in rust code. no english or explanations just output the code"
 ```
-Which can be called with `tgpt -r rs "how to reverse a vector"`. 
+Which can be called with `gptx -r rs "how to reverse a vector"`. 
 ```
-tgpt -r rs "how to reverse a vector"
+gptx -r rs "how to reverse a vector"
 let mut vec = vec![1, 2, 3, 4, 5];
 vec.reverse();
 ```
-Alternatively an alias can be set with `alias rsgpt="tgpt -r rs"`.
+Alternatively an alias can be set with `alias rsgpt="gptx -r rs"`.
 
 ## Scripting
-TGPT attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
+GPTX attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
 ### Examples
 #### cgpt
 The `cgpt` example illustrates how to safely make a command generating script. Below is an example of it's usage:

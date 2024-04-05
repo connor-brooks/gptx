@@ -1,3 +1,3 @@
 install:
 	cargo build --release;
-	cp target/release/tgpt ${HOME}/.local/bin
+	cp target/release/gptx ${HOME}/.local/bin

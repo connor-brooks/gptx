@@ -495,6 +495,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4271d37baee1b8c7e4b708028c57d816cf9d2434acb33a549475f78c181f6253"
 
 [[package]]
+name = "gptx"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "atty",
+ "chatgpt_rs",
+ "clap",
+ "colored",
+ "futures-util",
+ "rustyline",
+ "serde",
+ "tokio",
+ "toml",
+]
+
+[[package]]
 name = "h2"
 version = "0.3.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1126,22 +1142,6 @@ checksum = "a75fb188eb626b924683e3b95e3a48e63551fcfb51949de2f06a9d91dbee93c9"
 dependencies = [
  "core-foundation-sys",
  "libc",
-]
-
-[[package]]
-name = "tgpt"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "atty",
- "chatgpt_rs",
- "clap",
- "colored",
- "futures-util",
- "rustyline",
- "serde",
- "tokio",
- "toml",
 ]
 
 [[package]]

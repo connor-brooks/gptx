@@ -7,8 +7,8 @@ use rustyline::{
     config::Configurer, error::ReadlineError, Cmd, DefaultEditor, EditMode, EventHandler, KeyEvent,
 };
 
-/// TGPT is a terminal helper program based on OpenAI's GPT3 and GPT4 APIs... WIP :)
-/// Opening TGPT with no arguments will launch REPL mode, unless you have specified
+/// GPTX is a terminal helper program based on OpenAI's GPT3 and GPT4 APIs... WIP :)
+/// Opening GPTX with no arguments will launch REPL mode, unless you have specified
 /// an inital prompt.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -34,7 +34,7 @@ pub struct Args {
     pub prompt: Option<String>,
 }
 
-pub async fn repl_loop(state: &mut state::TgptState) -> Result<(), Error> {
+pub async fn repl_loop(state: &mut state::GptxState) -> Result<(), Error> {
     let mut rl = DefaultEditor::new()?;
     rl.set_edit_mode(EditMode::Vi);
     rl.bind_sequence(KeyEvent::alt('\x0d'), EventHandler::Simple(Cmd::Newline));

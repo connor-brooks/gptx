@@ -4,7 +4,7 @@ use atty::Stream;
 use chatgpt::prelude::*;
 use colored::*;
 
-pub struct TgptState {
+pub struct GptxState {
     pub inital_message: Option<String>,
     pub role: String,
     pub repl_mode: bool,
@@ -14,9 +14,9 @@ pub struct TgptState {
     pub conversation: Option<Conversation>,
 }
 
-fn print_state(s: &TgptState) {
+fn print_state(s: &GptxState) {
     println!("{}", "+-----------------------------+".yellow());
-    println!("{}", "TGPT State:".yellow());
+    println!("{}", "GPTX State:".yellow());
     println!("{}", "+-----------------------------+".yellow());
     println!("Initial message:      {:?}", s.inital_message);
     println!("Role:                 {:?}", s.role);
@@ -27,8 +27,8 @@ fn print_state(s: &TgptState) {
     println!("{}", "+-----------------------------+".yellow());
 }
 
-pub fn init(conf: config::Config, args: cli::Args) -> TgptState {
-    let mut state = TgptState {
+pub fn init(conf: config::Config, args: cli::Args) -> GptxState {
+    let mut state = GptxState {
         inital_message: args.prompt.clone(),
         role: args.role.clone(),
         repl_mode: args.repl_mode || args.prompt.is_none(),
