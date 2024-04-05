@@ -1,8 +1,6 @@
-![GPTX Logo](logo.png)
+![gptx Logo](logo.png)
 
-*GPT for the Unix shell*
-
-GPTX (GPT for UNIX) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining GPTX, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
+gptx (GPT for UNIX) is a simple CLI program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple extensible component to act as a building block allowing integration of LLMs into existing workflows, scripts and programs. For example, a simple shell script combining gptx, dmenu and xsel could be used to create a quick dictionary lookup or translation tool.
 
 ## Features
 * REPL mode
@@ -33,7 +31,7 @@ Options:
 ```
 
 ### REPL mode
-If GPTX is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `gptx -R "what is the capital of France"`)
+If gptx is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `gptx -R "what is the capital of France"`)
 
 | Keybinding   | Action           |
 | ------------ | ---------------- |
@@ -52,7 +50,7 @@ Piped mode allows data from any other program to be piped into your selected rol
 $ echo "dog elephant snake bee whale" | gptx "sort these by weight"
 whale, elephant, dog, snake, bee
 ```
-The output of GPTX can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | gptx -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
+The output of gptx can of course be piped or redirected just like any other CLI application. For example: `cat main.rs | gptx -r rs "add comments to this code" > main.commented.rs`, which would created a commented version of `main.rs`.
 
 
 
@@ -83,7 +81,7 @@ vec.reverse();
 Alternatively an alias can be set with `alias rsgpt="gptx -r rs"`.
 
 ## Scripting
-GPTX attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
+gptx attempts to provide only enough functionality to act as a building block for scripts, allowing the user to tailor a custom experience best suited to their unique workflows. Below a few examples are provided.
 ### Examples
 #### cgpt
 The `cgpt` example illustrates how to safely make a command generating script. Below is an example of it's usage:
@@ -94,7 +92,12 @@ Are you sure? [y/N]:
 ```
 
 ## Contribute
-Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder and make a pull request. Please ensure your script follows the template!
+Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder, add your script to the table below and make a pull request. Please ensure your script follows the template!
+
+## Contributed Scripts / Roles
+| Name                                                                                   | Description                                 | Author                                              |
+| -------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------|
+| [cgpt](https://raw.githubusercontent.com/connor-brooks/gptx/main/example/scripts/cgpt) | CLI command generator with execution dialog | [Connor Brooks](https://github.com/connor-brooks    |
 
 ## Notes
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
