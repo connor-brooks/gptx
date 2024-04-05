@@ -9,7 +9,6 @@
 #       prompt = "only reply in unix commands. no english or explanations just output the command"
 #
 
-
 if [ -z "$@" ] 
 then
     echo "Please provide an argument"
