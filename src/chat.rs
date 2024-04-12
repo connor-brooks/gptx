@@ -63,7 +63,10 @@ pub async fn process_single_msg(
                 response_index,
             } => {
                 print!("{}", delta.yellow());
-                stdout().lock().flush().unwrap();
+                stdout().lock().flush().unwrap_or_else(|_| {
+                    eprintln!("broken pipe...");
+                    std::process::exit(-1)
+                });
                 output.push(ResponseChunk::Content {
                     delta,
                     response_index,

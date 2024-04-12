@@ -27,7 +27,7 @@ fn print_state(s: &GptxState) {
     println!("{}", "+-----------------------------+".yellow());
 }
 
-pub fn init(conf: config::Config, args: cli::Args) -> GptxState {
+pub fn init(conf: config::Config, args: cli::Args) -> anyhow::Result<GptxState, anyhow::Error> {
     let mut state = GptxState {
         inital_message: args.prompt.clone(),
         role: args.role.clone(),
@@ -51,12 +51,10 @@ pub fn init(conf: config::Config, args: cli::Args) -> GptxState {
             conf.get_api_key(),
             ModelConfigurationBuilder::default()
                 .engine(ChatGPTEngine::Gpt4)
-                .build()
-                .unwrap(),
-        )
-        .unwrap()
+                .build()?,
+        )?
     } else {
-        ChatGPT::new(conf.get_api_key()).unwrap()
+        ChatGPT::new(conf.get_api_key())?
     };
 
     let conversation = gpt_client.new_conversation_directed(role.prompt);
@@ -66,5 +64,5 @@ pub fn init(conf: config::Config, args: cli::Args) -> GptxState {
         print_state(&state);
     }
 
-    state
+    Ok(state)
 }

@@ -9,12 +9,15 @@ use colored::*;
 #[tokio::main]
 async fn main() -> Result<()> {
     let conf = config::read_config().unwrap_or_else(|e| {
-        println!("{} {}", "config could not be read, exiting:".red(), e);
+        eprintln!("{} {}", "config could not be read, exiting:".red(), e);
         std::process::exit(-1)
     });
 
     let args = cli::Args::parse();
-    let mut state = state::init(conf, args);
+    let mut state = state::init(conf, args).unwrap_or_else(|e| {
+        eprintln!("{} {}", "problem starting up:".red(), e);
+        std::process::exit(-1)
+    });
 
     if state.piped {
         cli::print_verbose("handling piped data", state.verbose);
