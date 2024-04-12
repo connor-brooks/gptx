@@ -30,6 +30,19 @@ Options:
   -V, --version      Print version
 ```
 
+### One-shot mode
+This mode is best for simple queries. All that is needed is an inital prompt, for example:
+```
+$ gptx "What year was i686 released?"
+The i686 architecture was released in 1995.
+```
+Roles can be specified with the `-r` flag:
+```
+$ gptx -r rs "How to uppercase a string"
+let s = "hello";
+let upper_s = s.to_uppercase();
+```
+
 ### REPL mode
 If gptx is started with no arguments it will automatically start REPL mode. REPL mode allows you to carry out a conversation with the selected role. Additional REPL mode can be triggered by the `-R` flag, which allows you to provide an initial prompt and still enter REPL mode (e.g, `gptx -R "what is the capital of France"`)
 
@@ -38,7 +51,7 @@ If gptx is started with no arguments it will automatically start REPL mode. REPL
 | Return       | Send message     |
 | ESC          | Enter vi mode    |
 | ALT + Return | Insert newline   |
-| UP           | Previous history |
+| Up           | Previous history |
 | Down         | Next history     |
 
 ### Piped mode
