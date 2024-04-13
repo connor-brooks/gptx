@@ -97,10 +97,12 @@ gptx attempts to provide only enough functionality to act as a building block fo
 #### cgpt
 The `cgpt` example illustrates how to safely make a command generating script. Below is an example of it's usage:
 ```
-$ ./cgpt "resize all images in dir to 100px"
+$ cgpt "resize all images in dir to 100px"
 You are about to run: mogrify -resize 100x100 *.jpg
 Are you sure? [y/N]: 
 ```
+#### defgpt
+The `defgpt` is an example of how to use gptx in a non-terminal setting. When bound to a key combo (e.g, `<CTRL> + <ALT> + D`) it allows the user to quickly lookup a dictionary definition of the word in their clipboard, which is displayed via libnotify's `notify-send`. It is intended for this script to be used with Wayland, but can easily be adapted to X by substituting `wl-paste` with `xclip` or `xev`.
 
 ## Contributed Scripts / Roles
 Any scripts that integrate are welcome, just add your custom scripts to the `contrib` folder, add your script to the table below and make a pull request. Please ensure your script follows the template!

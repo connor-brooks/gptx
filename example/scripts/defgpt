@@ -1,0 +1,11 @@
+#!/bin/bash
+# Name: Command Generator
+# Description: Get a dictionary definitions of the word currently in the clipboard (wayland) as notfications via libnotify.
+# Version: 0.1
+# Author: Connor Brooks
+# [role.def]
+#     version = 4
+#     prompt = "reply only with the dictionary definition of the given word"
+    
+DEFINITION=$(gptx -r def "$(wl-paste)")
+notify-send "$(wl-paste)" "$DEFINITION"

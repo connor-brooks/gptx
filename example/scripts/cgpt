@@ -15,7 +15,7 @@ then
     exit
 fi
 
-CMD=$(tgpt -r cmd "$@")
+CMD=$(gptx -r cmd "$@")
 
 echo "You are about to run: $CMD"
 echo -n "Are you sure? [y/N]: " >/dev/tty
