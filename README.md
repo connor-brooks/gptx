@@ -109,6 +109,7 @@ Any scripts that integrate are welcome, just add your custom scripts to the `con
 | Name                                                                                   | Description                                 | Author                                              |
 | -------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------|
 | [cgpt](https://raw.githubusercontent.com/connor-brooks/gptx/main/example/scripts/cgpt) | CLI command generator with execution dialog | [Connor Brooks](https://github.com/connor-brooks)    |
+| [defgpt](https://raw.githubusercontent.com/connor-brooks/gptx/main/example/scripts/defgpt) | Display dictionary definitions with `notify-send` | [Connor Brooks](https://github.com/connor-brooks)    |
 
 ## Notes
 * The project was heavily inspired by TheR1D's [shell_gpt](https://github.com/TheR1D/shell_gpt).
