@@ -1,5 +1,4 @@
 ![gptx Logo](logo.png)
-![Community Scripts: 2](https://img.shields.io/badge/Community%20scripts-2-blue)
 
 gptx (GPT for Unix) is a simple Rust program for interacting with OpenAI's GPT APIs. Its goal is to offer a simple yet extensible component to act as a building block in a Unix CLI workflow, allowing easy integration of LLMs with traditional scripts and programs. For example, a simple shell script combining gptx, dmenu and xsel could be used to create a quick dictionary lookup or translation tool. A collection of community scripts making use of gptx can be found at the bottom of this document.
 
