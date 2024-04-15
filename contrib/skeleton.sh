@@ -15,4 +15,4 @@ then
     exit
 fi
 
-tgpt -r example "$@"
+gptx -r example "$@"
