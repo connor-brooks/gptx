@@ -14,6 +14,9 @@ gptx (GPT for Unix) is a simple Rust program for interacting with OpenAI's GPT A
 > [!IMPORTANT]
 > You must provide your API KEY via the `OPENAI_API_KEY` environment variable, or provide it as `api_key` in `config.toml` You must also define at least a default role in `config.toml`
 
+### Installation
+To install first run `make build`, then `make install`. This will install gptx to `~/.local/bin` and an example config to `~/.config/gptx/`.
+
 ### Arguments
 ```
 Usage: gptx [OPTIONS] [PROMPT]
