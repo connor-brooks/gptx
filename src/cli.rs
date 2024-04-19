@@ -79,3 +79,11 @@ pub fn print_verbose(m: &str, is_verbose: bool) {
         println!("{}: {}", "verbose".red(), m.replace('\n', "\\n"));
     }
 }
+
+#[macro_export]
+macro_rules! print_fatal {
+    ($msg:expr, $e:expr) => {{
+        eprintln!("{} {}", $msg.red(), $e); // Print the error message in red
+        std::process::exit(-1); // Exit with an error code
+    }};
+}

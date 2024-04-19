@@ -9,14 +9,12 @@ use colored::*;
 #[tokio::main]
 async fn main() -> Result<()> {
     let conf = config::read_config().unwrap_or_else(|e| {
-        eprintln!("{} {}", "Config could not be read, exiting:".red(), e);
-        std::process::exit(-1)
+        print_fatal!("Config could not be read, exiting:".red(), e);
     });
 
     let args = cli::Args::parse();
     let mut state = state::init(conf, args).unwrap_or_else(|e| {
-        eprintln!("{} {}", "Problem starting up:".red(), e);
-        std::process::exit(-1)
+        print_fatal!("Problem starting up:".red(), e);
     });
 
     if state.piped {
@@ -30,8 +28,7 @@ async fn main() -> Result<()> {
         chat::process_single_msg(&mut state, initial_msg)
             .await
             .unwrap_or_else(|e| {
-                eprintln!("{} {}", "Problem connecting to API:".red(), e);
-                std::process::exit(-1)
+                print_fatal!("Problem connecting to API:".red(), e);
             });
 
         if !state.repl_mode {
