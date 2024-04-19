@@ -1,5 +1,6 @@
 use crate::cli;
 use crate::config;
+use anyhow::{Error, Result};
 use atty::Stream;
 use chatgpt::prelude::*;
 use colored::*;
@@ -27,7 +28,7 @@ fn print_state(s: &GptxState) {
     println!("{}", "+-----------------------------+".yellow());
 }
 
-pub fn init(conf: config::Config, args: cli::Args) -> anyhow::Result<GptxState, anyhow::Error> {
+pub fn init(conf: config::Config, args: cli::Args) -> Result<GptxState, Error> {
     let mut state = GptxState {
         inital_message: args.prompt.clone(),
         role: args.role.clone(),

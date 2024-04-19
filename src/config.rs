@@ -1,3 +1,4 @@
+use anyhow::{Error, Result};
 use colored::*;
 use serde::Deserialize;
 use std::{collections::HashMap, env, fs};
@@ -14,7 +15,7 @@ pub struct Role {
     pub prompt: String,
 }
 
-pub fn read_config() -> Result<Config, anyhow::Error> {
+pub fn read_config() -> Result<Config, Error> {
     let home_dir = env::var("HOME")?;
     let config_str = fs::read_to_string(home_dir + "/.config/gptx/config.toml")?;
     let config: Config = toml::from_str(&config_str)?;
