@@ -89,6 +89,22 @@ pub fn print_resp_word(w: &str) {
     });
 }
 
+pub fn read_pipe() -> String {
+    let mut piped_msg = String::new();
+    loop {
+        let mut buf = String::new();
+        match io::stdin().read_line(&mut buf) {
+            Ok(0) => break,
+            Ok(_) => {}
+            Err(error) => {
+                crate::print_fatal!("Error getting piped: {:?}", error);
+            }
+        }
+        piped_msg.push_str(&buf);
+    }
+    piped_msg
+}
+
 #[macro_export]
 macro_rules! print_fatal {
     ($msg:expr, $e:expr) => {{

@@ -4,22 +4,9 @@ use anyhow::{Error, Result};
 use chatgpt::prelude::*;
 use colored::*;
 use futures_util::StreamExt;
-use std::io;
 
 pub async fn process_piped_msg(state: &mut state::GptxState) -> Result<()> {
-    let mut piped_msg = String::new();
-    loop {
-        let mut buf = String::new();
-        match io::stdin().read_line(&mut buf) {
-            Ok(0) => break,
-            Ok(_) => {}
-            Err(error) => {
-                println!("Error getting piped: {:?}", error);
-            }
-        }
-        piped_msg.push_str(&buf);
-    }
-
+    let piped_msg = cli::read_pipe();
     let inital_msg = state.inital_message.clone().unwrap_or("".to_string());
     let final_msg = format!("{}\n{}", inital_msg, piped_msg);
 
