@@ -5,7 +5,6 @@ use chatgpt::prelude::*;
 use colored::*;
 use futures_util::StreamExt;
 use std::io;
-use std::io::{stdout, Write};
 
 pub async fn process_piped_msg(state: &mut state::GptxState) -> Result<()> {
     let mut piped_msg = String::new();
@@ -62,10 +61,7 @@ pub async fn process_single_msg(
                 delta,
                 response_index,
             } => {
-                print!("{}", delta.yellow());
-                stdout().lock().flush().unwrap_or_else(|_| {
-                    crate::print_fatal!("broken pipe...", "");
-                });
+                cli::print_resp_word(&delta);
                 output.push(ResponseChunk::Content {
                     delta,
                     response_index,

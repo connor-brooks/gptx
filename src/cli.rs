@@ -6,6 +6,8 @@ use colored::*;
 use rustyline::{
     config::Configurer, error::ReadlineError, Cmd, DefaultEditor, EditMode, EventHandler, KeyEvent,
 };
+use std::io;
+use std::io::{stdout, Write};
 
 /// GPTX is a terminal helper program based on OpenAI's GPT3 and GPT4 APIs... WIP :)
 /// Opening GPTX with no arguments will launch REPL mode, unless you have specified
@@ -78,6 +80,13 @@ pub fn print_verbose(m: &str, is_verbose: bool) {
     if is_verbose {
         println!("{}: {}", "verbose".red(), m.replace('\n', "\\n"));
     }
+}
+
+pub fn print_resp_word(w: &str) {
+    print!("{}", w.yellow());
+    stdout().lock().flush().unwrap_or_else(|_| {
+        crate::print_fatal!("Broken pipe", "");
+    });
 }
 
 #[macro_export]
