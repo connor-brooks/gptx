@@ -1,5 +1,4 @@
 use anyhow::{Error, Result};
-use colored::*;
 use serde::Deserialize;
 use std::{collections::HashMap, env, fs};
 
@@ -27,22 +26,20 @@ impl Config {
         if let Some(v) = self.role.get(&role) {
             v.clone()
         } else {
-            println!("{} {}", "Could not find role: ".red(), role);
-            std::process::exit(-1);
+            crate::print_fatal!("Could not find role: ".red(), role);
         }
     }
 
     pub fn get_api_key(&self) -> String {
-        if self.api_key.is_some() {
-            self.api_key.clone().unwrap()
-        } else if env::var("OPENAI_API_KEY").is_ok() {
-            env::var("OPENAI_API_KEY").unwrap()
+        if let Some(k) = &self.api_key {
+            k.to_string()
+        } else if let Ok(k) = env::var("OPENAI_API_KEY") {
+            k
         } else {
-            println!(
-                "{}",
-                "No API key set, please set api_key in config or env variable OPENAI_API_KEY".red()
+            crate::print_fatal!(
+                "No API key set:".red(),
+                "please set api_key in config or env variable OPENAI_API_KEY"
             );
-            std::process::exit(-1);
         }
     }
 }

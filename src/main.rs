@@ -4,17 +4,16 @@ mod chat;
 mod cli;
 mod config;
 mod state;
-use colored::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let conf = config::read_config().unwrap_or_else(|e| {
-        print_fatal!("Config could not be read, exiting:".red(), e);
+        print_fatal!("Config could not be read, exiting:", e);
     });
 
     let args = cli::Args::parse();
     let mut state = state::init(conf, args).unwrap_or_else(|e| {
-        print_fatal!("Problem starting up:".red(), e);
+        print_fatal!("Problem starting up:", e);
     });
 
     if state.piped {
@@ -28,7 +27,7 @@ async fn main() -> Result<()> {
         chat::process_single_msg(&mut state, initial_msg)
             .await
             .unwrap_or_else(|e| {
-                print_fatal!("Problem connecting to API:".red(), e);
+                print_fatal!("Problem connecting to API:", e);
             });
 
         if !state.repl_mode {

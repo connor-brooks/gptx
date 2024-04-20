@@ -108,7 +108,8 @@ pub fn read_pipe() -> String {
 #[macro_export]
 macro_rules! print_fatal {
     ($msg:expr, $e:expr) => {{
-        eprintln!("{} {}", $msg.red(), $e); // Print the error message in red
+        use colored::*;
+        eprintln!("{} {}", $msg.to_string().red(), $e); // Print the error message in red
         std::process::exit(-1); // Exit with an error code
     }};
 }
