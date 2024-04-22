@@ -1,4 +1,5 @@
 use crate::cli;
+
 use crate::config;
 use anyhow::{Error, Result};
 use atty::Stream;
@@ -45,7 +46,7 @@ pub fn init(conf: config::Config, args: cli::Args) -> Result<GptxState, Error> {
         state.repl_mode = false
     }
 
-    let role = conf.get_role(state.role.clone());
+    let role = conf.get_role(&state.role);
     state.model_4 |= role.version == 4;
 
     // GPT4 or 3:
@@ -60,7 +61,7 @@ pub fn init(conf: config::Config, args: cli::Args) -> Result<GptxState, Error> {
         ChatGPT::new(conf.get_api_key())?
     };
 
-    let conversation = gpt_client.new_conversation_directed(role.prompt);
+    let conversation = gpt_client.new_conversation_directed(&role.prompt);
     state.conversation = Some(conversation);
 
     if state.verbose {

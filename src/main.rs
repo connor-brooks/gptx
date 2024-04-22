@@ -24,7 +24,7 @@ async fn main() -> Result<()> {
     if state.inital_message.is_some() {
         cli::print_verbose("Handling argument message", state.verbose);
         let initial_msg = state.inital_message.clone().unwrap();
-        chat::process_single_msg(&mut state, initial_msg)
+        chat::process_single_msg(&mut state, &initial_msg)
             .await
             .unwrap_or_else(|e| {
                 print_fatal!("Problem connecting to API:", e);

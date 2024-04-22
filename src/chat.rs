@@ -15,7 +15,7 @@ pub async fn process_piped_msg(state: &mut state::GptxState) -> Result<()> {
         state.verbose,
     );
 
-    if let Err(e) = process_single_msg(state, final_msg).await {
+    if let Err(e) = process_single_msg(state, &final_msg).await {
         println!(
             "{}. {}",
             "An error occured processing your message: ".red(),
@@ -32,10 +32,7 @@ pub async fn process_piped_msg(state: &mut state::GptxState) -> Result<()> {
     std::process::exit(0);
 }
 
-pub async fn process_single_msg(
-    state: &mut state::GptxState,
-    message: String,
-) -> Result<(), Error> {
+pub async fn process_single_msg(state: &mut state::GptxState, message: &str) -> Result<(), Error> {
     let mut stream = match &mut state.conversation {
         Some(conv) => conv.send_message_streaming(message).await?,
         None => std::process::exit(-1),

@@ -35,9 +35,9 @@ pub fn read_config() -> Result<Config, Error> {
 }
 
 impl Config {
-    pub fn get_role(&self, role: String) -> Role {
-        if let Some(v) = self.role.get(&role) {
-            v.clone()
+    pub fn get_role(&self, role: &str) -> &Role {
+        if let Some(r) = self.role.get(role) {
+            r
         } else {
             crate::print_fatal!("Could not find role: ".red(), role);
         }

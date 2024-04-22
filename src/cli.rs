@@ -52,7 +52,7 @@ pub async fn repl_loop(state: &mut state::GptxState) -> Result<(), Error> {
         match readline {
             Ok(line) => {
                 let _ = rl.add_history_entry(line.as_str());
-                chat::process_single_msg(state, line)
+                chat::process_single_msg(state, &line)
                     .await
                     .unwrap_or_else(|e| {
                         println!("{} {}", "An error occured:".red(), e);
