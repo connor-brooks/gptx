@@ -13,6 +13,7 @@ pub struct GptxState {
     pub model_4: bool,
     pub verbose: bool,
     pub conversation: Option<Conversation>,
+    pub resp_color: config::Color,
 }
 
 fn print_state(s: &GptxState) {
@@ -37,6 +38,7 @@ pub fn init(conf: config::Config, args: cli::Args) -> Result<GptxState, Error> {
         model_4: args.model_4,
         verbose: args.verbose,
         conversation: None,
+        resp_color: conf.resp_color.unwrap_or(config::Color::Yellow),
     };
 
     if state.piped {

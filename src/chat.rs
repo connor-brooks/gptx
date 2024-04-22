@@ -48,7 +48,7 @@ pub async fn process_single_msg(
                 delta,
                 response_index,
             } => {
-                cli::print_resp_word(&delta);
+                cli::print_resp_word(&delta, &state.resp_color);
                 output.push(ResponseChunk::Content {
                     delta,
                     response_index,

@@ -1,4 +1,5 @@
 use crate::chat;
+use crate::config;
 use crate::state;
 use anyhow::{anyhow, Error, Result};
 use clap::Parser;
@@ -82,8 +83,19 @@ pub fn print_verbose(m: &str, is_verbose: bool) {
     }
 }
 
-pub fn print_resp_word(w: &str) {
-    print!("{}", w.yellow());
+pub fn print_resp_word(w: &str, color: &config::Color) {
+    let text = match color {
+        config::Color::Black => w.black(),
+        config::Color::Red => w.red(),
+        config::Color::Green => w.green(),
+        config::Color::Yellow => w.yellow(),
+        config::Color::Blue => w.blue(),
+        config::Color::Magenta => w.magenta(),
+        config::Color::Cyan => w.cyan(),
+        config::Color::White => w.white(),
+    };
+
+    print!("{}", text);
     stdout().lock().flush().unwrap_or_else(|_| {
         crate::print_fatal!("Broken pipe", "");
     });
@@ -97,7 +109,7 @@ pub fn read_pipe() -> String {
             Ok(0) => break,
             Ok(_) => {}
             Err(error) => {
-                crate::print_fatal!("Error getting piped: {:?}", error);
+                crate::print_fatal!("Couldn't pipe data:", error);
             }
         }
         piped_msg.push_str(&buf);
@@ -109,7 +121,7 @@ pub fn read_pipe() -> String {
 macro_rules! print_fatal {
     ($msg:expr, $e:expr) => {{
         use colored::*;
-        eprintln!("{} {}", $msg.to_string().red(), $e); // Print the error message in red
-        std::process::exit(-1); // Exit with an error code
+        eprintln!("{} {}", $msg.to_string().red(), $e);
+        std::process::exit(-1);
     }};
 }

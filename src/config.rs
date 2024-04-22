@@ -6,12 +6,25 @@ use std::{collections::HashMap, env, fs};
 pub struct Config {
     pub role: HashMap<String, Role>,
     pub api_key: Option<String>,
+    pub resp_color: Option<Color>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct Role {
     pub version: u8,
     pub prompt: String,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize)]
+pub enum Color {
+    Black,
+    Red,
+    Green,
+    Yellow,
+    Blue,
+    Magenta,
+    Cyan,
+    White,
 }
 
 pub fn read_config() -> Result<Config, Error> {
